@@ -1,0 +1,5 @@
+IF YOU TRY TO SELL IT FUCK YOU!
+
+Customs:
+1. Change Font:
+	kosta_loading-dragon > css > menu.css

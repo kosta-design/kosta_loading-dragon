@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>kosta_loading-dragon</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/img.css">
+	<link rel="stylesheet" type="text/css" href="css/back.css">
+	<link rel="stylesheet" type="text/css" href="css/muscibutton.css">
+    <link href="css/cursor.css" media="all" rel="stylesheet" type="text/css">
+
+	<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main {
+        position: relative;
+    }
+
+    .dragon {
+        width: 200px;
+        height: 140px;
+        transform-origin: 50% 80%;
+        animation: zoomIn .5s cubic-bezier(0.47, 0, 0.75, 0.72) infinite alternate;
+    }
+
+    .dragon .body {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 180px;
+        height: 128px;
+        background: url(./img/body.png) no-repeat center center;
+        background-size: contain;
+        z-index: 10;
+    }
+
+    .dragon .horn-left {
+        position: absolute;
+        top: -17px;
+        left: 32px;
+        width: 31px;
+        height: 31px;
+        background: url(./img/horn-left.png) no-repeat;
+        background-size: contain;
+        z-index: 9;
+        transform-origin: 150% 200%;
+        transform: rotate(-5deg);
+        animation: swingRight .5s cubic-bezier(0.47, 0, 0.75, 0.72) infinite alternate;
+    }
+
+    .dragon .horn-right {
+        position: absolute;
+        top: -16px;
+        left: 110px;
+        width: 34px;
+        height: 31px;
+        background: url(./img/horn-right.png) no-repeat;
+        background-size: contain;
+        z-index: 9;
+        transform-origin: -50% 200%;
+        transform: rotate(5deg);
+        animation: swingLeft .5s cubic-bezier(0.47, 0, 0.75, 0.72) infinite alternate;
+    }
+
+    .dragon .eye {
+        position: absolute;
+        top: 39px;
+        width: 11px;
+        height: 11px;
+        background: url(./img/eye.png) no-repeat;
+        background-size: contain;
+        z-index: 12;
+    }
+
+    .dragon .eye.left {
+        left: 49px;
+    }
+
+    .dragon .eye.right {
+        left: 118px;
+        transform-origin: 50% 50%;
+        transform: rotate(180deg);
+    }
+
+    .dragon .blush {
+        position: absolute;
+        top: 46px;
+        width: 15px;
+        height: 9px;
+        background: url(./img/blush.png) no-repeat;
+        background-size: 100% 100%;
+        z-index: 11;
+        animation: blush .5s ease infinite alternate;
+    }
+
+    .dragon .blush.left {
+        left: 43px;
+    }
+
+    .dragon .blush.right {
+        left: 120px;
+    }
+
+    .dragon .mouth {
+        position: absolute;
+        top: 52px;
+        left: 49px;
+        width: 78px;
+        height: 56px;
+        background: url(./img/mouth.png) no-repeat;
+        background-size: 100%;
+        z-index: 11;
+        animation: openMouth 1s ease infinite;
+    }
+
+    .dragon .tail-sting {
+        position: absolute;
+        top: 67px;
+        left: 139px;
+        width: 40px;
+        height: 38px;
+        background: url(./img/tail-sting.png) no-repeat;
+        background-size: contain;
+        z-index: 9;
+        transform-origin: 0 100%;
+        animation: tailUp .5s cubic-bezier(0.47, 0, 0.75, 0.72) infinite alternate;
+    }
+
+    .shadow-wrapper {
+        position: absolute;
+        top: 110px;
+        width: 100%;
+    }
+
+    .shadow {
+        margin: 0 auto;
+        width: 110px;
+        height: 30px;
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 50%;
+        z-index: 0;
+        animation: zoomIn .5s cubic-bezier(0.47, 0, 0.75, 0.72) infinite alternate;
+    }
+
+    .fire-wrapper {
+        position: absolute;
+        width: 40px;
+        top: 60px;
+        left: 88px;
+        transform: translate(-50%, -50%);
+        transform-origin: 50% 100%;
+        animation: fireUp 1s ease-in infinite;
+    }
+
+    .fire {
+        padding-bottom: 135%;
+        width: 100%;
+        height: 100%;
+        background: url(./img/fire.png) no-repeat;
+        background-size: contain;
+        animation: fire 1s ease-out infinite;
+    }
+
+    .progress {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    .progress .outer {
+        width: 100%;
+        height: 14px;
+        border-radius: 7px;
+        background: rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .progress .inner {
+        width: 0;
+        height: 100%;
+        background: #ffcd33;
+        animation: loading 2s linear infinite;
+    }
+
+    @keyframes zoomIn {
+        100% {
+            transform: scale(1.16, 1.16);
+        }
+    }
+
+    @keyframes swingRight {
+        100% {
+            transform: rotate(5deg);
+        }
+    }
+
+    @keyframes swingLeft {
+        100% {
+            transform: rotate(-5deg);
+        }
+    }
+
+    @keyframes blush {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes openMouth {
+        0% {
+            -webkit-clip-path: ellipse(20% 0% at 50% 0);
+                    clip-path: ellipse(20% 0% at 50% 0);
+        }
+
+        50% {
+            -webkit-clip-path: ellipse(100% 100% at 50% 0);
+                    clip-path: ellipse(100% 100% at 50% 0);
+        }
+
+        70% {
+            -webkit-clip-path: ellipse(100% 100% at 50% 0);
+                    clip-path: ellipse(100% 100% at 50% 0);
+        }
+
+        100% {
+            -webkit-clip-path: ellipse(20% 0% at 50% 0);
+                    clip-path: ellipse(20% 0% at 50% 0);
+        }
+    }
+
+    @keyframes tailUp {
+        0% {
+            transform: scaleY(0.9);
+        }
+
+        100% {
+            transform: scaleY(1.06);
+        }
+    }
+
+    @keyframes loading {
+        100% {
+            width: 100%;
+        }
+    }
+
+    @keyframes fireUp {
+        0% {
+            top: 70px;
+        }
+
+        20% {
+            top: 70px;
+        }
+
+        100% {
+            top: -80px;
+        }
+    }
+
+    @keyframes fire {
+        0% {
+            transform: scale(0, 0);
+            opacity: 0.8;
+        }
+
+        20% {
+            transform: scale(0, 0);
+            opacity: 0.8;
+        }
+
+        50% {
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: scale(1, 1);
+            opacity: 0;
+        }
+    }
+    </style>
+</head>
+<body>
+<!-- CURSOR -->
+<svg id="cursor" width="20" height="20">
+      <defs>
+        <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f2c061"></stop>
+          <stop offset="100%" stop-color="#da1b60"></stop>                    <!-- LEAVE cursor SECTION AS IT IS OR YOU WILL BE CATAPULTED INTO ANOTHER DIMENSION-->
+        </linearGradient>
+      </defs>
+      <circle r="07" cx="10" cy="10" fill="none"></circle>
+      <line x1="0" y1="0" x2="20" y2="20"></line>
+      <line x1="0" y1="20" x2="20" y2="0"></line>
+</svg>
+<!-- /CURSOR\ -->
+<!-- /BACKGROUND\ -->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<!-- /BACKGROUND\ -->
+
+<!--#############-->
+<!-- MAIN MENU -->
+<!--#############-->
+<div class="container">
+ <h1>
+    <a href="#menu">
+		<div class="main">
+        <div class="shadow-wrapper">
+            <div class="shadow"></div>
+        </div>
+        <div class="dragon">
+            <div class="body"></div>
+            <div class="horn-left"></div>
+            <div class="horn-right"></div>
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="blush left"></div>
+            <div class="blush right"></div>
+            <div class="mouth"></div>
+            <div class="tail-sting"></div>
+        </div>
+        <div class="fire-wrapper">
+            <div class="fire"></div>
+        </div>
+        <div class="progress">
+            <div class="outer">
+                <div class="inner"></div>
+            </div>
+        </div>
+    </div>
+	</a>
+ </h1>
+    
+<div class="popover" id="menu">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'">
+    <ul class = 'nav_list'>
+      
+	 <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#slike">Gallery</a></li>
+      </div>
+     <div class = 'nav_list_item'>
+		<li><a href="#onas">About</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#pravila">Rules</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#osebje">Staff</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#soc">Social Networks</a></li>
+      </div>
+	<div class = 'nav_list_item'>
+	  <li><a href="#music">Music</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!--#################-->
+<!-- //MAIN MENU\\ -->
+<!--#################-->
+
+
+<!--################-->
+<!-- SECONDARY MENU -->
+<!--################-->
+<!-- SLIKE -->
+<div class="container">
+<div class="popover" id="slike">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li>
+		<figure class="snip1482">
+		  <figcaption>
+			<h6>Richard Hammond</h6>
+			<n>You can stick a BMW badge on a dead cat - and people would still buy it.</n>
+		  </figcaption>
+		  <img src="https://i.imgur.com/ALfdaLJ.jpg" alt="sample45" />
+		</figure>
+		<figure class="snip1482">
+		  <figcaption>
+			<h6>Bruce McLaren</h6>
+			<n>Live is measured in achievement not in years alone.</n>
+		  </figcaption>
+		  <img src="https://i.imgur.com/5bGoPcv.jpg" alt="sample59" />
+		</figure>
+		<figure class="snip1482">
+		  <figcaption>
+			<h6>Ferruccio Lamborghini</h6>
+			<n>When you stop working, you start to die.</n>
+		  </figcaption>
+		  <img src="https://i.imgur.com/WhdoK7Q.jpg" alt="sample60" />
+		</figure>
+		<script>
+		/* Demo purposes only */
+		$(".hover").mouseleave(
+		  function () {
+			$(this).removeClass("hover");
+		  }
+		);
+		</script>
+      </li>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#menu" style="color: #BF2E97; font-size: 30px;">BACK</a></li>
+      </div>
+	  
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /SLIKE\ --> 
+
+<!-- O NAS -->
+<div class="container">
+<div class="popover" id="onas">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#slike" style="font-size: 30px;">Something is supposed to be written about us here, I'm just not sure what to write...</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#menu" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /O NAS\ -->
+
+<!-- PRAVILA -->
+<div class="container">
+<div class="popover" id="pravila">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#rdm">RDM</a></li>
+      </div>
+     <div class = 'nav_list_item'>
+		<li><a href="#vdm">VDM</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#pg">PG</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#mg">MG</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#cs">CS</a></li>
+	  </div>
+	<div class = 'nav_list_item'>
+	  <li><a href="#menu" style="color: #BF2E97; font-size: 30px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /PRAVILA\ -->
+
+<!-- OSEBJE -->
+<div class="container">
+<div class="popover" id="osebje">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#lastnik">Owner</a></li>
+      </div>
+     <div class = 'nav_list_item'>
+		<li><a href="#gadmin">Senior Administrator</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#admin">Administrator</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#gmod">Senior Moderator</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#mod">Moderator</a></li>
+    </div>
+	<div class = 'nav_list_item'>
+	  <li><a href="#pomoc">Helper</a></li>
+    </div>
+	<div class = 'nav_list_item'>
+	  <li><a href="#menu" style="color: #BF2E97; font-size: 30px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /OSEBJE\ -->
+
+<!-- SOCIALNA OMREŽJA -->
+<div class="container">
+<div class="popover" id="soc" id="BACK">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#discord">Discord</a></li>
+      </div>
+     <div class = 'nav_list_item'>
+		<li><a href="#twitter">Twitter</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#instagram">Instagram</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+	  <li><a href="#facebook">Facebook</a></li>
+      </div>
+    <div class = 'nav_list_item'>
+		<li><a href="#youtube">YouTube</a></li>
+      </div>
+	<div class = 'nav_list_item'>
+	  <li><a href="#menu" style="color: #BF2E97; font-size: 30px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /SOCIALNA OMREŽJA\ -->
+
+<!-- MUZIKA -->
+<div class="container">
+<div class="popover" id="music" id="BACK">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	<li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+    <div class = 'nav_list_item'>
+	  <li>
+		<h4 onclick="playAudio()" href="#" class="fancy-btn">Play</h4> <br>
+		<h4 onclick="pauseAudio()" href="#" class="fancy-btn">Pause</h4> <br>
+		<h4 href="#" class="fancy-btn">Press SPACE to play or pause music.</h4><br>
+	  </li>
+	  </li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /MUZIKA\ -->
+<!--####################-->
+<!-- //SECONDARY MENU\\ -->
+<!--####################-->
+
+
+<!--##############-->
+<!-- PRAVILA MENU -->
+<!--##############-->
+<!-- RDM -->
+<div class="container">
+<div class="popover" id="rdm">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#pravila" style="font-size: 30px;">Random Death Match. RDM is killing or testing another player without any kind of hostile initiation. Intentions must be clearly stated in relation to the intended objective and they must be given a reasonable time to respond. Sending messages by phone to the player is an allowed way to start RP. (Initiation only takes five minutes. This means if you tell someone to raise their hands or die and run away for more than 5 minutes you have to start again)</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#pravila" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /RDM\ -->
+
+<!-- VDM -->
+<div class="container">
+<div class="popover" id="vdm">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#pravila"  style="font-size: 30px;">Vehicle Deathmatch. Accidental encounters with others are not acceptable and result in an immediate ban. You can run over someone if they pose a threat to you or if you have enough reason to do so. The police can maneuver for a reason.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#pravila" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /VDM\ -->
+
+<!-- PG -->
+<div class="container">
+<div class="popover" id="pg">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#pravila"  style="font-size: 30px;">This involves using game mechanics or role-playing to change the situation to best suit your preferences. RP you need to be willing to play to the fullest and not spoil the experience of others.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#pravila" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+	  
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /PG\ -->
+
+<!-- MG -->
+<div class="container">
+<div class="popover" id="mg">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#pravila"  style="font-size: 30px;">Metagaming is not allowed under any circumstances: stream sniping is included in this rule.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#pravila" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /MG\ -->
+
+<!-- CS -->
+<div class="container">
+<div class="popover" id="cs">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#pravila"  style="font-size: 30px;">Combat storing to avoid robbery / arrest is not allowed.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#pravila" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /CS\ -->
+<!--##################-->
+<!-- //PRAVILA MENU\\ -->
+<!--##################-->
+
+
+<!--#############-->
+<!-- OSEBJE MENU -->
+<!--#############-->
+<!-- LASTNIK -->
+<div class="container">
+<div class="popover" id="lastnik">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px; color: lightblue;">iTz Nick</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /LASTNIK\ -->
+
+<!-- VIŠJI ADMINISTRATOR -->
+<div class="container">
+<div class="popover" id="gadmin">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">UGH incompetent staff</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /VIŠJI ADMINISTRATOR\ -->
+
+<!-- ADMINISTRATOR -->
+<div class="container">
+<div class="popover" id="admin">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">Juji Penjač</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">K!NG</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+	  
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /ADMINISTRATOR\ -->
+
+<!-- VIŠJI MODERATOR -->
+<div class="container">
+<div class="popover" id="gmod">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">China</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /VIŠJI MODERATOR\ -->
+
+<!-- MODERATOR -->
+<div class="container">
+<div class="popover" id="mod">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">PuLsE_Darknes</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">lucky0lukey</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">杀手Haruko杀手</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /MODERATOR\ -->
+
+<!-- POMOČNIK -->
+<div class="container">
+<div class="popover" id="pomoc">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="font-size: 30px;">Noone EJGA</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#osebje" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /POMOČNIK\ -->
+<!--#################-->
+<!-- //OSEBJE MENU\\ -->
+<!--#################-->
+
+
+<!--##########-->
+<!-- SOC MENU -->
+<!--##########-->
+<!-- DISCORD -->
+<div class="container">
+<div class="popover" id="discord">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="font-size: 30px; color: lightblue;">https://invite.gg/sloroyale</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /DISCORD\ -->
+
+<!-- TWITTER -->
+<div class="container">
+<div class="popover" id="twitter">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="font-size: 30px;">Unfortunately, Twitter is </a><a style="color: red;">NOT</a><a style="font-size: 30px;"> available yet.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /TWITTER\ -->
+
+<!-- INSTAGRAM -->
+<div class="container">
+<div class="popover" id="instagram">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="font-size: 30px;">Unfortunately, Instagram is </a><a style="color: red;">NOT</a><a style="font-size: 30px;"> available yet.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+	  
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /INSTAGRAM\ -->
+
+<!-- FACEBOOK -->
+<div class="container">
+<div class="popover" id="facebook">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="font-size: 30px;">Unfortunately, Facebook is </a><a style="color: red;">NOT</a><a style="font-size: 30px;"> available yet.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /FACEBOOK\ -->
+
+<!-- YOUTUBE -->
+<div class="container">
+<div class="popover" id="youtube">
+ <div class = 'content'>
+  <a href="#" class="close"></a>
+   <div class = 'nav'>
+    <ul class = 'nav_list'>
+      
+	  <li><img src="img/sloroyale-logo.png" width="130" height="130"></li>
+      <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="font-size: 30px;">Unfortunately, YouTube is </a><a style="color: red;">NOT</a><a style="font-size: 30px;"> available yet.</a></li>
+      </div>
+	  <div class = 'nav_list_item'>
+	  <li><a href="#soc" style="color: #BF2E97; font-size: 20px;">BACK</a></li>
+      </div>
+      
+	</ul>
+  </div>
+ </div>
+ </div>
+ </div>
+<!-- /YOUTUBE\ -->
+<!--##############-->
+<!-- //SOC MENU\\ -->
+<!--##############-->
+<audio id="leson" src="audio.mp3" autoplay="true" hidden="true" loop="true"/>
+<script>
+var play = false;
+var myAudio = document.getElementById("leson");
+    
+myAudio.volume = 0.1;
+
+function onKeyDown(event) {
+  switch (event.keyCode) {
+    case 32: //SpaceBar                    
+      if (play) {
+        myAudio.pause();
+        play = false;
+      } else {
+        myAudio.play();
+        play = true;
+      }
+    break;
+    }
+      return false;
+    }
+
+function playAudio() { 
+  myAudio.play(); 
+} 
+
+function pauseAudio() { 
+  myAudio.pause(); 
+} 
+
+window.addEventListener("keydown", onKeyDown, false);
+</script>
+
+<!-- BALLS -->
+<script>
+// Some random colors
+const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
+
+const numBalls = 50;
+const balls = [];
+
+for (let i = 0; i < numBalls; i++) {
+  let ball = document.createElement("div");
+  ball.classList.add("ball");
+  ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+  ball.style.left = `${Math.floor(Math.random() * 89)}vw`;
+  ball.style.top = `${Math.floor(Math.random() * 80)}vh`;
+  ball.style.transform = `scale(${Math.random()})`;
+  ball.style.width = `${Math.random()}em`;
+  ball.style.height = ball.style.width;
+  
+  balls.push(ball);
+  document.body.append(ball);
+}
+
+// Keyframes
+balls.forEach((el, i, ra) => {
+  let to = {
+    x: Math.random() * (i % 2 === 0 ? -11 : 11),
+    y: Math.random() * 12
+  };
+
+  let anim = el.animate(
+    [
+      { transform: "translate(0, 0)" },
+      { transform: `translate(${to.x}rem, ${to.y}rem)` }
+    ],
+    {
+      duration: (Math.random() + 1) * 2000, // random duration
+      direction: "alternate",
+      fill: "both",
+      iterations: Infinity,
+      easing: "ease-in-out"
+    }
+  );
+});
+</script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="js/plugins.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+</body>
+</html>
